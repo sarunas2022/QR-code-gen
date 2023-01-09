@@ -12,6 +12,17 @@ export default function App() {
         setQr(input);
         setInput('');
     };
+
+    const downloadQR = () => {
+        const canvas = document.getElementById('qrCode');
+        const pngUrl = canvas.toDataURL('image/png');
+        let downloadLink = document.createElement('a');
+        downloadLink.href = pngUrl;
+        downloadLink.download = 'qr code.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+    };
+
     const qrcode = (
         <Container align='center' sx={{ pt: 10 }}>
             <QRCodeCanvas
@@ -21,11 +32,12 @@ export default function App() {
                 level={'H'}
             ></QRCodeCanvas>
             <Box sx={{ pt: 4 }}>
-                <Button variant='contained'>Download QR code</Button>
+                <Button onClick={downloadQR} variant='contained'>
+                    Download QR code
+                </Button>
             </Box>
         </Container>
     );
-    console.log(input);
     return (
         <Container>
             <Container sx={{ pt: 4 }}>
