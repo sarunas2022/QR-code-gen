@@ -4,15 +4,18 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { Container, TextField, Typography, Button, Box } from '@mui/material';
 
 export default function App() {
+    // states for input and qr code on click
     const [input, setInput] = useState('');
     const [qr, setQr] = useState('');
 
+    // function to setting qr code value and deleting input field value after submit
     const inputSubmit = (event) => {
         event.preventDefault();
         setQr(input);
         setInput('');
     };
 
+    // function for downloading a qr code
     const downloadQR = () => {
         const canvas = document.getElementById('qrCode');
         const pngUrl = canvas.toDataURL('image/png');
@@ -23,9 +26,11 @@ export default function App() {
         downloadLink.click();
     };
 
+    // function returns generated grcode after taking data from input field
     const qrcode = (
         <Container align='center' sx={{ pt: 10 }}>
             <QRCodeCanvas
+                className='output'
                 id='qrCode'
                 value={qr}
                 size={300}
@@ -46,6 +51,7 @@ export default function App() {
                 </Typography>
                 <Box sx={{ display: 'flex' }}>
                     <TextField
+                        // in order to be able to submit inout on enter event for key click set
                         onKeyPress={(e) => {
                             e.key === 'Enter' && inputSubmit(e);
                         }}
@@ -59,6 +65,7 @@ export default function App() {
                     </Button>
                 </Box>
             </Container>
+            {/* if qr value is not set returns empty div, else returns qr code */}
             {!qr ? <div /> : qrcode}
         </Container>
     );
