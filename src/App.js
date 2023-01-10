@@ -7,7 +7,6 @@ export default function App() {
     // states for input and qr code on click
     const [input, setInput] = useState('');
     const [qr, setQr] = useState('');
-
     // function to setting qr code value and deleting input field value after submit
     const inputSubmit = (event) => {
         event.preventDefault();
@@ -33,7 +32,7 @@ export default function App() {
                 className='output'
                 id='qrCode'
                 value={qr}
-                size={300}
+                size={260}
                 level={'H'}
             ></QRCodeCanvas>
             <Box sx={{ pt: 4 }}>
